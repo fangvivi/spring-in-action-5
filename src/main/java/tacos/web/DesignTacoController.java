@@ -1,14 +1,22 @@
 package tacos.web;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
+import tacos.Taco;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Controller
+@Slf4j
+@RequestMapping("/design")
 public class DesignTacoController {
 
     @GetMapping
@@ -31,14 +39,15 @@ public class DesignTacoController {
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
-        return null;
+        model.addAttribute("design",new Taco());
+        return "design";
     }
 
     private List<Ingredient> filterByType(
             List<Ingredient> ingredients, Type type){
         return ingredients
                 .stream()
-                .filter(x -> x.getType().equals(type))
-                .collect(Collectors.toList());
+                .filter(x -> x.getType().equals(type)).collect(Collectors.toList()
+                );
     }
 }
