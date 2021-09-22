@@ -1,13 +1,13 @@
-package tacos;
+package tacos.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
 
+    /* 使用WebConfig代替这个控制器
     @GetMapping("/")
     public String home(){
         return "home";
-    }
+    }*/
 }

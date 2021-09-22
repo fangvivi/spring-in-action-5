@@ -17,11 +17,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author wayne
+ * 大多数处理请求的方法都会返回一个视图的逻辑名称
+ */
 @Controller
 @Slf4j
 @RequestMapping("/design")
 public class DesignTacoController {
 
+    /**
+     * 简单来说，model可以在渲染视图的时候提供数据
+     * @param model
+     * @return
+     */
     @GetMapping
     public String showDesignForm(Model model){
         List<Ingredient> ingredients = Arrays.asList(
@@ -42,13 +51,13 @@ public class DesignTacoController {
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
-        model.addAttribute("design",new Taco());
+        model.addAttribute("designObj",new Taco());
         return "design";
     }
 
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("design")Taco design, Errors errors){
+    public String processDesign(@Valid @ModelAttribute("designObj")Taco design, Errors errors){
         if(errors.hasErrors()){
             return "design";
         }
