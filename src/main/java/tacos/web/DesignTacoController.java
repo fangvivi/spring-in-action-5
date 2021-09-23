@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     /**
-     * 简单来说，model可以在渲染视图的时候提供数据
+     * 简单来说，model负责在控制器和视图之间传递数据，实际上放到Model属性中的数据会复制到Servlet Response的属性中
      * @param model
      * @return
      */
@@ -56,6 +56,12 @@ public class DesignTacoController {
     }
 
 
+    /**
+     * @ModelAttribute 注解可以直接复用showDesignForm()中的"designObj"对象，直接把这个对象传递给design视图
+     * @param design
+     * @param errors
+     * @return
+     */
     @PostMapping
     public String processDesign(@Valid @ModelAttribute("designObj")Taco design, Errors errors){
         if(errors.hasErrors()){
